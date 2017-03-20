@@ -30,8 +30,10 @@ public class ImageProc {
 
         matrix.preScale(-1, 1);
 
-        bitmapImage = Bitmap.createBitmap(bitmapImage, 0, 0,
-                640, 480, matrix, false);
+//        matrix.postRotate(90);
+//
+//        bitmapImage = Bitmap.createBitmap(bitmapImage, 0, 0,
+//                640, 480, matrix, false);
 
         return bitmapImage;
     }
