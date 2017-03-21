@@ -13,6 +13,6 @@
     <com.dreamguard.facedetect.FaceView
         android:id="@+id/faceView"
         android:layout_width="640px"
-        android:layout_height="480px" />
+        android:layout_height="640px" />
 
 </RelativeLayout>

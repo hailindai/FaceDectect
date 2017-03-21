@@ -23,6 +23,16 @@ public class FaceTrackerThread extends Thread {
         return mPoints;
     }
 
+    private int orientation;
+
+    public int getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
+    }
+
     public Handler getHandler() {
         synchronized (mSync) {
             if (mHandler == null) {
@@ -53,7 +63,7 @@ public class FaceTrackerThread extends Thread {
                     switch (msg.what){
                         case FaceConst.MSG_IMAGE:
                             mCurrentState = FaceTrackerState.RUNNING;
-                            FaceDetector.readValue(msg.getData().getByteArray("imageData"),mPoints);
+                            FaceDetector.readValue(msg.getData().getByteArray("imageData"),mPoints,orientation);
                             mCurrentState = FaceTrackerState.IDLE;
                             break;
                         case FaceConst.MSG_TERMINATE:

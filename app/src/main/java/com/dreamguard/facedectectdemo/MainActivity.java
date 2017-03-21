@@ -1,5 +1,7 @@
 package com.dreamguard.facedectectdemo;
 
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.dreamguard.facedetect.FaceTracker;
@@ -14,17 +16,24 @@ public class MainActivity extends AppCompatActivity{
 
     protected FaceTracker mFaceTracker;
 
-
+    protected int orientation = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mFaceView = (FaceView)findViewById(R.id.faceView);
+
+        Configuration configuration = getResources().getConfiguration();
+        if (configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            orientation = 1;
+        }
+
         mFaceTracker = new FaceTracker();
+
         mFaceTracker.init(this, new IFaceTrackerCallback() {
             @Override
             public void onImage(byte[] image) {
-                mFaceView.setFaceBitmap(ImageProc.getBitmap(image));
+                mFaceView.setFaceBitmap(ImageProc.getBitmap(image,orientation));
             }
 
             @Override
@@ -32,7 +41,7 @@ public class MainActivity extends AppCompatActivity{
                 mFaceView.setPoints(data);
                 mFaceView.invalidate();
             }
-        });
+        },orientation);
     }
 
     @Override

@@ -21,19 +21,21 @@ public class ImageProc {
         return var3;
     }
 
-    public static Bitmap getBitmap(byte[] bytes){
+    public static Bitmap getBitmap(byte[] bytes,int orientation){
         int[] imagePixels = applyGrayScale(bytes, 640, 480);
 
         Bitmap bitmapImage = Bitmap.createBitmap(imagePixels, 640, 480, Bitmap.Config.RGB_565);
 
         Matrix matrix = new Matrix();
 
-        matrix.preScale(-1, 1);
+        matrix.postScale(-1, 1);
 
-//        matrix.postRotate(90);
-//
-//        bitmapImage = Bitmap.createBitmap(bitmapImage, 0, 0,
-//                640, 480, matrix, false);
+        if(orientation != 0) {
+            matrix.postRotate(90);
+        }
+
+        bitmapImage = Bitmap.createBitmap(bitmapImage, 0, 0,
+                640, 480, matrix, false);
 
         return bitmapImage;
     }

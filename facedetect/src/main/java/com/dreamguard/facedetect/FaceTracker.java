@@ -126,7 +126,7 @@ public class FaceTracker implements Camera.PreviewCallback{
         }
     }
 
-    public void init(Context context,IFaceTrackerCallback callback){
+    public void init(Context context,IFaceTrackerCallback callback,int orientation){
 
         mContext = context;
         mCallback = callback;
@@ -140,6 +140,7 @@ public class FaceTracker implements Camera.PreviewCallback{
         FaceDetector.init(path);
 
         mThread = new FaceTrackerThread();
+        mThread.setOrientation(orientation);
         mThread.start();
         mThreadHandler = mThread.getHandler();
     }
