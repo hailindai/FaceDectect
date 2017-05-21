@@ -2,6 +2,9 @@
 
 It is available free for non-commercial use
 
+
+<h2>use method</h2>
+
 	allprojects {
 		repositories {
 			...
